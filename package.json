@@ -1,15 +1,14 @@
 {
-  "name": "cesar-bot",
+  "name": "Ndrangheta-bot",
+  "description": "Test",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bot.js"
   },
-  "author": "matiaas_gabriel",
-  "license": "ISC",
   "dependencies": {
     "discord.js": "^11.3.2",
+    "request": "2.81.0"
     "samp-query": "^0.1.5"
   }
 }
