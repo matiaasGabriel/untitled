@@ -1,54 +1,3 @@
-/*
-{
-  "embed": {
-    "title": "__**Bienvenido al servidor discord de la banda 'Ndrangheta**__",
-    "description": "\n **¿Perteneces a la banda?** \n\n Completa lo siguente para poder chatear con los miembros de la banda.\n\n `♝ Nick: \n♝ Rango: \n♝ Rol: Bajo/Medio/Alto`",
-    "url": "",
-    "color": 824436,
-    "timestamp": "Friday, April 27th 2018 @ 11:08:56 pm",
-    "footer": {
-      "icon_url": "https://cdn.discordapp.com/embed/avatars/0.png",
-      "text": "Matiaas"
-    },
-    "thumbnail": {
-      "url": "https://cdn.discordapp.com/attachments/476778543129296896/479392079273787412/logo.jpg"
-    },
-    "image": {
-      "url": "https://cdn.discordapp.com/attachments/476777384725708801/476848001286012977/logo_1.jpg"
-    },
-    "author": {
-      "name": "Matiaas",
-      "url": "",
-      "icon_url": "https://cdn.discordapp.com/avatars/389526841062588416/0647fb224e4b5e25e61f29ac93f14468.png"
-    },
-    "fields": [
-      {
-        "name": "🕵️‍🌹",
-        "value": "➤ Importante: Ser activo, No antirol, Respeto."
-      },
-      {
-        "name": "* Espera siento que me falta algo...",
-        "value": "😱 __**a cierto los miembros nuevos...**__"
-      },
-      {
-        "name": "🙄",
-        "value": "Bueno... Para los miembros nuevos deberan ir a <@479382299599699968>"
-      },
-      {
-        "name": "<:thonkang:219069250692841473>",
-        "value": "Gracias por unirse al servidor discord de La banda 'Ndrangheta.",
-        "inline": true
-      }
-    ]
-  }
-}
-
-  if (message.channel.type === "dm") 
-   message.reply("Tu reporte ha sido enviado a todos los administradores de la banda.");
-   client.channels.get("476857925613387787").send(`${message.author} Ha Reportado.\n\n **__(Reporte)__**\n${message.content}\n**__(Tag)__**\n@esveryone`)
-   return;
-*/
-
 const Discord = require("discord.js");
 const client = new Discord.Client(); 
 const config = require("./config.json");
@@ -146,7 +95,6 @@ if(message.author.bot) return;
       const embed = {
   "description": `\n:robot: __**BOT DICE:\n**__ESTE REPORTE ES INVÁLIDO DESPUÉS DE HABER RECIBIDO OTRO.\n\n:speech_left: ${message.author} __**DICE:**__\n${message.content}\n\n__**ID:**__\n${message.author.id}`,
   "color": 16743680,
-  //"timestamp": `${message.createdAt}`,
   "footer": {
     "icon_url": "https://cdn.discordapp.com/attachments/480084489771417600/489101173304066049/596bd0f8541debff8d44326e840ea085.png",
     "text": `SISTEMA DE REPORTES • ${message.createdAt}`
@@ -214,7 +162,8 @@ if (message.channel.id === "476777384725708801") {
     message.react(client.emojis.get("488774156133990412"))
     message.react(client.emojis.get("488765926460882964"))
     message.react(client.emojis.get("488774449412177920"))
-    message.react(client.emojis.get("492075758089535488"))  
+    message.react(client.emojis.get("492075758089535488"))
+	/* Random */
 }
 
 if(responseObject[message.content]) {
@@ -283,15 +232,6 @@ if(message.content.indexOf(config.prefix) !== 0) return;
     const m = await message.channel.send("Ping?");
     m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
   }
-if(command === "block") {
-  //let newBlacklistedID = message.content.split(" ").slice(1, 2)[0];
-  let newBlacklistedID = args[0];
-  // change the configuration in memory
-  config.BlacklistedID = newBlacklistedID;
-
-  // Now we have to save the file.
-  fs.writeFile("./config.json", JSON.stringify(BlacklistedID), (err) => console.error);
-}
 
   if(command === "help") {
     const embed = {
@@ -404,7 +344,6 @@ if(command === "r") {
 const embed = {
   "description": `:robot: **__SISTEMA DE ADMINISTRACIÓN.\n\n(USUARIO EXPULSADO)__**\n${member.user}(ID: ${member.user.id})\n\n**__(RAZÓN:)__**\n${reason}`,
   "color": 16743680,
-  "timestamp": "2018-09-11T23:07:23.911Z",
   "footer": {
     "icon_url": "https://cdn.discordapp.com/attachments/480084489771417600/489167278647148565/logo.jpg",
     "text": `SISTEMA DE ADMINISTRACIÓN • ${message.createdAt}`
@@ -441,7 +380,6 @@ const embed = {
 const embed = {
   "description": `:robot: **__SISTEMA DE ADMINISTRACIÓN.\n\n(USUARIO PROHÍBIDO)__**\n${member.user}(ID: ${member.user.id})\n\n**__(RAZÓN:)__**\n${reason}`,
   "color": 16743680,
-  "timestamp": "2018-09-11T23:07:23.911Z",
   "footer": {
     "icon_url": "https://cdn.discordapp.com/attachments/480084489771417600/489167278647148565/logo.jpg",
     "text": `SISTEMA DE ADMINISTRACIÓN • ${message.createdAt}`
