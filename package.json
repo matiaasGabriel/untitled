@@ -2,13 +2,13 @@
   "name": "Ndrangheta-bot",
   "description": "Test",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.js"
   "scripts": {
     "start": "node bot.js"
   },
   "dependencies": {
     "discord.js": "^11.3.2",
-    "request": "2.81.0"
+    "request": "2.81.0",
     "samp-query": "^0.1.5"
   }
 }
