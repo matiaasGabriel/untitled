@@ -53,7 +53,7 @@ if (onlineput.has()) {
 client.on('guildMemberAdd', member => 
 {
 const embed = {
-  "description": `:speech_left: :bust_in_silhouette: **__BIENVENIDO A ${WHERE}!__**\n\nAh, hola, soy el bot a cargo de la banda!\nSupongo que eres el nuevo miembro.\nContinuaré diciéndote lo que se necesita para permanecer en la banda.\n\n**➤ Importante: Ser activo, No Antirol y respeto a todos.\n➤ Rellena lo siguiente en el canal <#476844038088294420> para poder ver los todos los canales del servidor discord @${WHERE}.**\n\n`♝ Nick:\n♝ Rango:\n♝ Rol: Bajo/Medio/Alto`\n\n:speaking_head: __**Simplemente eso, \nGracias por unirse a ${WHERE} esperamos que se divierta mucho.**__`,
+  "description": `:speech_left: :bust_in_silhouette: **__BIENVENIDO A ${WHERE}!__**\n\nAh, hola, soy el bot a cargo de la banda!\nSupongo que eres el nuevo miembro.\nContinuaré diciéndote lo que se necesita para permanecer en la banda.\n\n**➤ Importante: Ser activo, No Antirol y respeto a todos.\n➤ Rellena lo siguiente en el canal <#476844038088294420> para poder ver los todos los canales del servidor discord @${WHERE}.**\n\n♝ Nick:\n♝ Rango:\n♝ Rol: Bajo/Medio/Alto\n\n:speaking_head: __**Simplemente eso, \nGracias por unirse a ${WHERE} esperamos que se divierta mucho.**__`,
   "color": 16743680,
   "timestamp": "2018-09-11T22:35:04.173Z",
   "footer": {
@@ -94,7 +94,7 @@ if(message.author.bot) return;
       if(message.attachments.size <= 0) {
       RUserID = [`${message.author.id}`]
       const embed = {
-  "description": `\n:robot: __**BOT DICE:\n**__ESTE REPORTE ES INVÁLIDO DESPUÉS DE HABER RECIBIDO OTRO.\n\n:speech_left: ${message.author} __**DICE:**__\n${message.content}\n\n__**ID:**__\n${message.author.id}`,
+  "description": `:robot: __**BOT DICE:\n**__ESTE REPORTE ES INVÁLIDO DESPUÉS DE HABER RECIBIDO OTRO.\n\n:speech_left: ${message.author} __**DICE:**__\n${message.content}\n\n__**ID:**__\n${message.author.id}`,
   "color": 16743680,
   "footer": {
     "icon_url": "https://cdn.discordapp.com/attachments/480084489771417600/489101173304066049/596bd0f8541debff8d44326e840ea085.png",
