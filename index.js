@@ -36,8 +36,8 @@ if (onlineput.has()) {
     } else {
     client.user.setStatus("online");
     query(options, function (error, response) {
-    if(error)
-    else 
+    if(error) return
+    else
         client.channels.get("493348597836808202").edit({ name: `🤖-ℙlayer▸ ${response.online}`})
 })
   }
