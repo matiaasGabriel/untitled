@@ -9,7 +9,8 @@ var query = require('samp-query')
 var options = {
     host: '192.99.135.246'
 }
-
+WHERE = [process.env.BOT_WHERE]
+BOT_LINK = [process.env.BOT_WHERE]
 const responseObject = {
   "fidget_spinner": `<a:fidget_spinner:488765926460882964>`,
   "fidthink": `<a:fidthink:488774120822145055>`,
@@ -28,8 +29,8 @@ const responseObject = {
 
 client.on("ready", () => 
 {
-  console. log(`Ndrangheta-Bot`);
-  client.user.setActivity(`Super-rp.net | !help`);
+  console. log(process.env.BOT_LOG);
+  client.user.setActivity(process.env.BOT_PLAYING);
   var interval = setInterval (function () {
 if (onlineput.has()) {
     } else {
@@ -51,15 +52,15 @@ if (onlineput.has()) {
 client.on('guildMemberAdd', member => 
 {
 const embed = {
-  "description": ":speech_left: :bust_in_silhouette: **__BIENVENIDO A 'Ndrangheta!__**\n\nAh, hola, soy el bot a cargo de la banda!\nSupongo que eres el nuevo miembro.\nContinuaré diciéndote lo que se necesita para permanecer en la banda.\n\n**➤ Importante: Ser activo, No Antirol y respeto a todos.\n➤ Rellena lo siguiente en el canal <#476844038088294420> para poder ver los todos los canales del servidor discord @'Ndrangheta**\n\n`♝ Nick:\n♝ Rango:\n♝ Rol: Bajo/Medio/Alto`\n\n:speaking_head: __**Simplemente eso, \nGracias por unirse a @'Ndrangheta esperamos que se divierta mucho.**__",
+  "description": `:speech_left: :bust_in_silhouette: **__BIENVENIDO A ${WHERE}!__**\n\nAh, hola, soy el bot a cargo de la banda!\nSupongo que eres el nuevo miembro.\nContinuaré diciéndote lo que se necesita para permanecer en la banda.\n\n**➤ Importante: Ser activo, No Antirol y respeto a todos.\n➤ Rellena lo siguiente en el canal <#476844038088294420> para poder ver los todos los canales del servidor discord @${WHERE}.**\n\n`♝ Nick:\n♝ Rango:\n♝ Rol: Bajo/Medio/Alto`\n\n:speaking_head: __**Simplemente eso, \nGracias por unirse a ${WHERE} esperamos que se divierta mucho.**__`,
   "color": 16743680,
   "timestamp": "2018-09-11T22:35:04.173Z",
   "footer": {
     "icon_url": "https://cdn.discordapp.com/attachments/480084489771417600/489167278647148565/logo.jpg",
-    "text": "'Ndrangheta bot. by Alice"
+    "text": `${WHERE} bot. by Alice`
   },
   "image": {
-    "url": "https://cdn.discordapp.com/attachments/480084489771417600/489103878701449216/Ndrangheta_gif_1.gif"
+    "url": `${BOT_LINK}`
   },
   "author": {
     "name": "! Alice ★",
@@ -226,7 +227,9 @@ if(message.content.indexOf(config.prefix) !== 0) return;
     client.users.get(`${RUserID}`).send(`__**Respuesta recibida del administrador: ${message.author}**__\n\n${RMessage}`);
     message.reply(`Mensaje enviado correctamente a <@${RUserID}>\n\n**__(Respuesta)__**\n ${RMessage}`);
   }
-
+if(command === "as" {
+	message.reply(`${WHERE}`)
+}
   if(command === "ping") {
     const m = await message.channel.send("Ping?");
     m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
