@@ -36,7 +36,6 @@ if (onlineput.has()) {
     client.user.setStatus("online");
     query(options, function (error, response) {
     if(error)
-        console.log(error)
     else 
         client.channels.get("493348597836808202").edit({ name: `🤖-ℙlayer▸ ${response.online}`})
 })
@@ -177,7 +176,7 @@ if(responseObject[message.content]) {
     if(error)
         message.delete()
     else 
-        message.channel.send(`Oh. por supuesto, ${message.createdAt}: el servidor tiene ${response.online} jugadores online y su ip es: samp.super-rp.xyz`);
+        message.channel.send(`Oh. por supuesto, el servidor tiene ${response.online} jugadores online y su ip es: samp.super-rp.xyz`);
 })
   }
   if (message.content.match(/Ndrangheta/i)) {
