@@ -177,7 +177,7 @@ if(responseObject[message.content]) {
     if(error)
         message.delete()
     else 
-        message.channel.send(`Oh. por supuesto, el servidor tiene ${response.online} jugadores online y su ip es: samp.super-rp.xyz`);
+        message.channel.send(`Oh. por supuesto, ${message.createdAt}: el servidor tiene ${response.online} jugadores online y su ip es: samp.super-rp.xyz`);
 })
   }
   if (message.content.match(/Ndrangheta/i)) {
