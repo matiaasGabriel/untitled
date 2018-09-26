@@ -228,7 +228,7 @@ if(message.content.indexOf(config.prefix) !== 0) return;
     client.users.get(`${RUserID}`).send(`__**Respuesta recibida del administrador: ${message.author}**__\n\n${RMessage}`);
     message.reply(`Mensaje enviado correctamente a <@${RUserID}>\n\n**__(Respuesta)__**\n ${RMessage}`);
   }
-if(command === "as" {
+if(command === "as") {
 	message.reply(`${WHERE}`)
 }
   if(command === "ping") {
