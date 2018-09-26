@@ -229,7 +229,7 @@ if(message.content.indexOf(config.prefix) !== 0) return;
     message.reply(`Mensaje enviado correctamente a <@${RUserID}>\n\n**__(Respuesta)__**\n ${RMessage}`);
   }
 if(command === "as") {
-	message.reply(`${WHERE}`)
+	message.reply(`${WHERE} ${BOT_LINK}`)
 }
   if(command === "ping") {
     const m = await message.channel.send("Ping?");
