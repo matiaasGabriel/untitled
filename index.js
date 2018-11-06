@@ -54,7 +54,7 @@ if (onlineput.has()) {
 client.on('guildMemberAdd', member => 
 {
 const embed = {
-  "description": ":speech_left: :bust_in_silhouette: **__BIENVENIDO AL SERVIDOR!__**\n\nAh, hola, soy el bot a cargo del **__Servidor__**!\nSupongo que eres el nuevo miembro.\nContinuaré diciéndote lo que se necesita para permanecer en el **__DISCORD DEL SERVIDOR__**.\n\n➤ ``Está prohibido insultar o faltar el respeto.``\n\n➤ ``Está prohibido realizar SPAM masivo, esto no quiere decir que no se pueda nombrar otro servidor.``\n\n➤ ``El canal #general  es para hablar sobre cosas relacionadas con el servidor, para hablar de cosas que no estén relacionadas con el servidor H-RP se usa #off-topic``\n\n➤ ``No se atienden reportes por Discord, solo en el foro.``\n\nRESPETAR ESTAS REGLAS PARA PODER PERMANECER EN EL DISCORD DEL SERVIDOR!.\n\n **__DISFRUTAR DEL SERVIDOR Y RECUERDA USAR ``!help`` SI TIENES ALGUNA DUDA.__**",
+  "description": ":speech_left: :bust_in_silhouette: **__BIENVENIDO AL SERVIDOR!__**\n\nAh, hola, soy el bot a cargo del **__Servidor__**!\nSupongo que eres el nuevo miembro.\nContinuaré diciéndote lo que se necesita para permanecer en el **__DISCORD DEL SERVIDOR__**.\n\n➤ ``Está prohibido insultar o faltar el respeto.``\n\n➤ ``Está prohibido realizar SPAM masivo.``\n\n➤ ``El canal #general  es para hablar sobre cosas relacionadas con el servidor, para hablar de cosas que no estén relacionadas con el servidor H-RP se usa #off-topic``\n\n➤ ``No se atienden reportes por Discord, solo en el foro.``\n\nRESPETAR ESTAS REGLAS PARA PODER PERMANECER EN EL DISCORD DEL SERVIDOR!.\n\n **__DISFRUTAR DEL SERVIDOR Y RECUERDA USAR ``!help`` SI TIENES ALGUNA DUDA.__**",
   "color": 16098851
 };
 member.send({ embed });   
@@ -112,7 +112,7 @@ if(message.attachments.size <= 1) {
   }
 }
 
-if (message.channel.id === "496028782759772160") {
+if (message.channel.id === "509144448811401227") {
     message.react(client.emojis.get("476847482719174657"))
     message.react(client.emojis.get("488775516397109258"))
     message.react(client.emojis.get("488774156133990412"))
