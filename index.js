@@ -6,11 +6,12 @@ const talkedRecently = new Set();
 const onlineput = new Set();
 const fs = require("fs")
 var query = require('samp-query')
+SERVER_IP = [process.env.SERVERIP]
+REPORTARLINK = [process.env.REPORTARLINK]
 var options = {
-    host: '192.99.135.246'
+    host: `${SERVER_IP}`
 }
-WHERE = [process.env.BOT_WHERE]
-BOT_LINK = [process.env.BOT_WHERE]
+
 const responseObject = {
   "fidget_spinner": `<a:fidget_spinner:488765926460882964>`,
   "fidthink": `<a:fidthink:488774120822145055>`,
@@ -29,17 +30,17 @@ const responseObject = {
 
 client.on("ready", () => 
 {
-  console. log(process.env.BOT_LOG);
-  client.user.setActivity(process.env.BOT_PLAYING);
+  console. log(`BOT FUNCIONANDO`);
+  client.user.setActivity(`${SERVER_IP} | !help`);
   var interval = setInterval (function () {
 if (onlineput.has()) {
     } else {
     client.user.setStatus("online");
     query(options, function (error, response) {
     if(error)
-	console. log(error)
-    else
-        client.channels.get("493348597836808202").edit({ name: `🤖-ℙlayer▸ ${response.online}`})
+        console.log(error)
+    else 
+        client.channels.get("504745609287303183").edit({ name: `🤖-ℙlayer▸${response.online}`})
 })
   }
     onlineput.add();
@@ -47,245 +48,363 @@ if (onlineput.has()) {
         client.user.setStatus("dnd"); 
         onlineput.delete();
     }, 2000);
-        }, 1 * 4000); 
+        }, 1 * 4000);
 });
 
 client.on('guildMemberAdd', member => 
 {
 const embed = {
-  "description": `:speech_left: :bust_in_silhouette: **__BIENVENIDO A ${WHERE}!__**\n\nAh, hola, soy el bot a cargo de la banda!\nSupongo que eres el nuevo miembro.\nContinuaré diciéndote lo que se necesita para permanecer en la banda.\n\n**➤ Importante: Ser activo, No Antirol y respeto a todos.\n➤ Rellena lo siguiente en el canal <#476844038088294420> para poder ver los todos los canales del servidor discord @${WHERE}.**\n\n♝ Nick:\n♝ Rango:\n♝ Rol: Bajo/Medio/Alto\n\n:speaking_head: __**Simplemente eso, \nGracias por unirse a ${WHERE} esperamos que se divierta mucho.**__`,
-  "color": 16743680,
-  "timestamp": "2018-09-11T22:35:04.173Z",
-  "footer": {
-    "icon_url": "https://cdn.discordapp.com/attachments/480084489771417600/489167278647148565/logo.jpg",
-    "text": `${WHERE} bot. by Alice`
-  },
-  "image": {
-    "url": `${BOT_LINK}`
-  },
-  "author": {
-    "name": "! Alice ★",
-    "url": "https://discordapp.com/channels/@me/402612675982524426",
-    "icon_url": "https://cdn.discordapp.com/avatars/389526841062588416/5008341da3548acccd1a55348614f15f.png"
-  },
-  "fields": []
+  "description": ":speech_left: :bust_in_silhouette: **__BIENVENIDO AL SERVIDOR!__**\n\nAh, hola, soy el bot a cargo del **__Servidor__**!\nSupongo que eres el nuevo miembro.\nContinuaré diciéndote lo que se necesita para permanecer en el **__DISCORD DEL SERVIDOR__**.\n\n➤ ``Está prohibido insultar o faltar el respeto.``\n\n➤ ``Está prohibido realizar SPAM masivo, esto no quiere decir que no se pueda nombrar otro servidor.``\n\n➤ ``El canal #general  es para hablar sobre cosas relacionadas con el servidor, para hablar de cosas que no estén relacionadas con el servidor H-RP se usa #off-topic``\n\n➤ ``No se atienden reportes por Discord, solo en el foro.``\n\nRESPETAR ESTAS REGLAS PARA PODER PERMANECER EN EL DISCORD DEL SERVIDOR!.\n\n **__DISFRUTAR DEL SERVIDOR Y RECUERDA USAR ``!help`` SI TIENES ALGUNA DUDA.__**",
+  "color": 16098851
 };
 member.send({ embed });   
-   member.addRoles(['476532548416045077', '476861498954612764'])
-   client.channels.get("476857925613387787").send(`${member.user} Ingresando al servidor.\n@everyone`)
-   //console.log(`${member.user.username} Ingresando al servidor.`);
+   client.channels.get("506202099575554056").send(`${member.user} Ingresando al servidor.`)
 });
 
-client.on("guildMemberRemove", (member) => 
+client.on("guildMemberRemove", member => 
 {
-   client.channels.get("476857925613387787").send(`${member.user} Saliendo del servidor.`)
-   //console.log(`${member.user.username} Saliendo del servidor.`);
+client.channels.get("506202099575554056").send(`${member.user} Saliendo del servidor.`)
 });
+
 
 client.on("message", async message => 
 {
 if(message.author.bot) return;
 
-  if (message.channel.type === "dm") {
-    if (message.author.id === config.BlacklistedID) return message.reply("No puedo servirte, estás prohibido.").then(message.delete())      
-             if (talkedRecently.has(message.author.id)) {
-            message.reply(`Tranquilo! Podrás reportar después de haber pasado 3 minutos.`);
-    } else {
-      if(message.attachments.size <= 0) {
-      RUserID = [`${message.author.id}`]
-      const embed = {
-  "description": `:robot: __**BOT DICE:\n**__ESTE REPORTE ES INVÁLIDO DESPUÉS DE HABER RECIBIDO OTRO.\n\n:speech_left: ${message.author} __**DICE:**__\n${message.content}\n\n__**ID:**__\n${message.author.id}`,
-  "color": 16743680,
-  "footer": {
-    "icon_url": "https://cdn.discordapp.com/attachments/480084489771417600/489101173304066049/596bd0f8541debff8d44326e840ea085.png",
-    "text": `SISTEMA DE REPORTES • ${message.createdAt}`
-  },
-  "thumbnail": {
-    "url": "https://cdn.discordapp.com/attachments/480084489771417600/489103878701449216/Ndrangheta_gif_1.gif"
-  },
-  "author": {
-    "name": `${message.author.username}`,
-    "icon_url": `${message.author.avatarURL}`
-  },
-  "fields": []
-};
-      message.react(client.emojis.get("488765926460882964"))
-      client.channels.get("476857925613387787").send("Ping Pong @everyone hemos recibido un nuevo reporte.", { embed });
-      }
-   if(message.attachments.size <= 1) {
-      var Attachment = (message.attachments).array();
-      Attachment.forEach(function(attachment) {
-      RUserID = [`${message.author.id}`]
-        const embed = {
-  "description": `\n:robot: __**BOT DICE:\n**__ESTE REPORTE ES INVÁLIDO DESPUÉS DE HABER RECIBIDO OTRO.\n\n:speech_left: ${message.author} __**DICE:**__\n${message.content}\n\n__**ID:**__\n${message.author.id}\n\n:gem: **__FOTOS:__**`,
-  "color": 16743680,
-  "timestamp": "2018-09-11T15:44:16.153Z",
-  "footer": {
-    "icon_url": "https://cdn.discordapp.com/attachments/480084489771417600/489101173304066049/596bd0f8541debff8d44326e840ea085.png",
-    "text": `SISTEMA DE REPORTES • ${message.createdAt}`
-  },
-  "thumbnail": {
-    "url": "https://cdn.discordapp.com/attachments/480084489771417600/489103878701449216/Ndrangheta_gif_1.gif"
-  },
-  "image": {
-    "url": `${attachment.url}`
-  },
-  "author": {
-    "name": `${message.author.username}`,
-    "icon_url": `${message.author.avatarURL}`
-  },
-  "fields": []
-};
-      client.channels.get("476857925613387787").send("Ping Pong @everyone hemos recibido un nuevo reporte.", { embed });
-      message.react(client.emojis.get("488765926460882964"))
-    });
-      talkedRecently.add(message.author.id);
-        setTimeout(() => {
-          message.reply("Ya puedes enviar otro reporte.")
-          talkedRecently.delete(message.author.id);
-        }, 180000);
-    }
-  }
-}
-
 if (message.channel.type === "dm") return;
-   if (message.channel.id === "476777439415107586") {
+  if (message.channel.id === "504748185533808661") {
     if(message.attachments.size <= 0) {
        message.delete()
        message.channel.send(`${message.author}, Solo fotos.`).then(sentMessage => {
        sentMessage.delete(2000);
     }); 
-    }
+  }
 }
-if (message.channel.id === "476777384725708801") {
+
+if (message.channel.id === "504827352509972481") {
+
+if(message.attachments.size <= 0) {
+        const embed = {
+  "description": `**__${message.author} Ha hecho una sugerencia sin imagen.\n\n(CONTENIDO):__**\n${message.content}`,
+  "color": 16743680
+};
+    client.channels.get("506202099575554056").send({ embed });
+    client.users.get(`${message.author.id}`).send(`Sugerencia enviada.`).then(EliminarMensaje => {
+    message.delete(1000);
+  })
+}
+
+if(message.attachments.size <= 1) {
+      var Attachment = (message.attachments).array();
+      Attachment.forEach(function(attachment) {
+        const embed = {
+  "description": `**__${message.author} Ha hecho una sugerencia con imagen.\n\n(CONTENIDO):__**\n${message.content}\n**__(FOTOS):__**`,
+  "color": 16743680,
+  "image": {
+    "url": `${attachment.url}`
+  }
+};
+      client.channels.get("506202099575554056").send({ embed });
+      client.users.get(`${message.author.id}`).send(`Sugerencia con imagen enviada.`).then(EliminarMensaje => {
+      message.delete(1000);
+      })
+    });
+  }
+}
+
+if (message.channel.id === "496028782759772160") {
     message.react(client.emojis.get("476847482719174657"))
     message.react(client.emojis.get("488775516397109258"))
     message.react(client.emojis.get("488774156133990412"))
     message.react(client.emojis.get("488765926460882964"))
     message.react(client.emojis.get("488774449412177920"))
-    message.react(client.emojis.get("492075758089535488"))
-	/* Random */
+    message.react(client.emojis.get("492075758089535488"))  
 }
 
 if(responseObject[message.content]) {
     message.channel.send(responseObject[message.content]);
   }
-  if (message.content.match(/Ndrangheta-Bot/i)) {
-    message.channel.send("Sí, dime ¿que necesitas? Puedo recibir reportes por mensaje privado y tengo una variedad de comandos útiles. usa !help");
-  }
-  if (message.content.match(/Serv/i)) {
+if (message.content.match(/Serv/i)) {
   query(options, function (error, response) {
     if(error)
-        message.delete()
+        console.log(error)
     else 
-        message.channel.send(`Oh. por supuesto, el servidor tiene ${response.online} jugadores online y su ip es: samp.super-rp.xyz`);
+        message.channel.send(`Oh. por supuesto, el servidor tiene ${response.online} jugadores online y su ip es: ${SERVER_IP}`).then(sentMessage => {
+      sentMessage.delete(1000);
+    })
 })
   }
-  if (message.content.match(/Ndrangheta/i)) {
-    const attachment = new Attachment('https://i.imgur.com/QJ9Yhvn.jpg');
-    message.channel.send(attachment);
-  }
-if (message.content.match(/Conquista/i)) {
-   message.channel.send("Alguien dijo conquista? Soy muy bueno en eso.");
-}
 if (message.content.match(/Reporte/i)) {
-   message.channel.send("¿Quieres reportar? Envíame un mensaje y informo.");
+   message.channel.send(`¿Quieres reportar? Ve: ${REPORTARLINK}.`);
 }
 if (message.content.match(/Reporta/i)) {
-   message.channel.send("¿Quieres reportar? Envíame un mensaje y informo.");
+   message.channel.send(`¿Quieres reportar? Ve: ${REPORTARLINK}.`);
 }
 if (message.content.match(/Ayuda/i)) {
    message.channel.send("¿Que necesitas?");
+}
+if (message.content.match(/Samphub/i)) {
+   if(!message.member.roles.some(r=>["Administrador", "Moderador"].includes(r.name)) ) return
+   message.delete()
+   message.reply("Calmate.").then(sentMessage => {
+  sentMessage.delete(2000);
+  });
+}
+if (message.content.match(/Champu/i)) {
+   message.delete()
+   message.reply("Calmate.").then(sentMessage => {
+  sentMessage.delete(2000);
+  });
+}
+if (message.content.match(/PornHub/i)) {
+   message.delete()
+   message.reply("Calmate.").then(sentMessage => {
+  sentMessage.delete(2000);
+  });
+}
+if (message.content.match(/Ayuda/i)) {
+   message.delete()
+   message.reply("Calmate.");
 }
 if (message.content.match(/Viva Ndrangheta/i)) {
    message.channel.send("¡VIVA!");
 }
 if (message.content.match(/Hdp/i)) {
    message.delete()
-   message.reply("Calmate.");
+   message.reply("Calmate.").then(sentMessage => {
+  sentMessage.delete(2000);
+  });
 }
 if (message.content.match(/Puto/i)) {
    message.delete() 
-   message.reply("Calmate.");
+   message.reply("Calmate.").then(sentMessage => {
+  sentMessage.delete(2000);
+  });
 }
 if (message.content.match(/Puta/i)) {
    message.delete()
-   message.reply("Calmate.");
+   message.reply("Calmate.").then(sentMessage => {
+  sentMessage.delete(2000);
+  });
 }
 if (message.content.match(/Mierda/i)) {
+   if(!message.member.roles.some(r=>["Administrador", "Moderador"].includes(r.name)) ) return
    message.delete() 
-   message.reply("Calmate.");
+   message.reply("Calmate.").then(sentMessage => {
+  sentMessage.delete(2000);
+  });
+}
+if (message.content.match(/Pto/i)) {
+   message.delete() 
+   message.reply("Calmate.").then(sentMessage => {
+  sentMessage.delete(2000);
+  });
+}
+if (message.content.match(/mmgvo/i)) {
+   message.delete() 
+   message.reply("Calmate.").then(sentMessage => {
+  sentMessage.delete(2000);
+  });
+}
+if (message.content.match(/Pta/i)) {
+   message.delete() 
+   message.reply("Calmate.").then(sentMessage => {
+  sentMessage.delete(2000);
+  });
+}
+if (message.content.match(/qlo/i)) {
+   message.delete() 
+   message.reply("Calmate.").then(sentMessage => {
+  sentMessage.delete(2000);
+  });
 }
 
 if(message.content.indexOf(config.prefix) !== 0) return;
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
-  if(command === "rdm") {
-    if(!message.member.roles.some(r=>["Administrador-bot", "Moderador-bot"].includes(r.name)) )
-      return message.channel.sendMessage('No tenes permisos para utilizar este comando.');
-    const RMessage = args.join(" ");
-    client.users.get(`${RUserID}`).send(`__**Respuesta recibida del administrador: ${message.author}**__\n\n${RMessage}`);
-    message.reply(`Mensaje enviado correctamente a <@${RUserID}>\n\n**__(Respuesta)__**\n ${RMessage}`);
-  }
-if(command === "as") {
-	message.reply(`${WHERE} ${BOT_LINK}`)
+
+if(command === "create") {
+var server = message.guild;
+var chatname1 = `${message.author.username}`.toLowerCase();
+var chatname2 = `${chatname1}`.replace(/ /g,"");
+var chatname3 = `${chatname2}`.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "");
+var finalchatname = `${chatname3}`; 
+var voicename = `${message.author.username}`;
+message.delete()
+
+if (message.guild.channels.exists('name', `💭▸chat-${finalchatname}`)) {
+    client.users.get(`${message.author.id}`).send(`Tu canal chat ya está creado por lo cual no se creará nuevamente.`);
+    console.log(`${finalchatname} no else de chat`)
+    } else {
+    console.log(`${finalchatname} else de chat`)
+server.createChannel(`💭▸chat-${finalchatname}`, 'text').then( // CREAR CANAL TEXTO.  
+    (chan1) => {// DESPUES DE CREAR EL CANAL VAMOS A MOVERLO A LA CATEGORIA. Y ENVIAMOS EL MENSAJE INFORMANDOLO.
+        chan1.setParent("505044934009815040").then( // MOVER CANAL
+            (chan2) => {
+                  chan2.overwritePermissions(message.guild.roles.find('name', '@everyone'), { // PARA QUE EVERYONE NO VEA EL CANAL
+                     'READ_MESSAGES' : false
+                  });
+                  chan2.overwritePermissions(message.author.id,  { // DARLE PERMISOS AL USUARIO
+                  'MANAGE_PERMISSIONS': true, 'MANAGE_CHANNELS': true,
+                  'READ_MESSAGES': true
+                  }); // SI ES EL DUEÑO...
+                  console.log("CANAL TEXTO CREADO");
+                }
+             
+            )
+          }
+        )
+    }
+
+
+if (message.guild.channels.exists('name', `🔊▸voz-${voicename}`)) { // ¿EL CANAL VOZ EXISTE?
+    console.log(`${voicename} no else de voz`)
+    client.users.get(`${message.author.id}`).send(`Tu canal voz ya está creado por lo cual no se creará nuevamente.`);
+    } else {
+    console.log(`${voicename} else de voz`)
+server.createChannel(`🔊▸voz-${voicename}`, 'voice').then(// CREAR EL CANAL AUDIO
+    (chan3) => {
+        chan3.setParent("505044934009815040").then( // MOVER CANAL.
+            (chan4) => {
+                  chan4.overwritePermissions(message.guild.roles.find('name', '@everyone'), { // EVERYONE NO PUEDE
+                     'CREATE_INSTANT_INVITE' : false,        'VIEW_CHANNEL': false,
+                     'CONNECT': false,                       'SPEAK': false
+                  });
+                  chan4.overwritePermissions(message.author.id,  { // USUARIO PUEDE
+                  'MANAGE_PERMISSIONS':true,              'MANAGE_CHANNELS': true,
+                  'VIEW_CHANNEL': true,                   'CONNECT': true,            
+                  'SPEAK': true
+                  });
+                  console.log("CANAL VOZ CREADO");// INFORMAR CANAL TERMINADO
+                } 
+            
+            )
+          }
+        )
+    }
 }
+
+if(command === "dar") {
+var chatname1 = `${message.author.username}`.toLowerCase();
+var chatname2 = `${chatname1}`.replace(/ /g,"");
+var chatname3 = `${chatname2}`.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\_\-\&])/g, "");
+var finalchatname = `${chatname3}`; 
+
+var voicename = `${message.author.username}`;
+
+const ctoe = client.channels.find("name", `🔊▸voz-${voicename}`)
+const ctoe2 = client.channels.find("name", `💭▸chat-${finalchatname}`)
+message.delete();
+
+let member = message.mentions.members.first();
+    if(!member) return client.users.get(`${message.author.id}`).send("Tenes que mencionar un miembro válido de este servidor")
+
+if (message.guild.channels.exists('name', `🔊▸voz-${voicename}`)) { 
+      ctoe.overwritePermissions(member.user.id,  {
+                  'MANAGE_PERMISSIONS':false,              'MANAGE_CHANNELS': false,
+                  'VIEW_CHANNEL': true,                   'CONNECT': true,            
+                  'SPEAK': true
+    });
+  client.users.get(`${message.author.id}`).send(`Hecho. Ahora ${member} Puede conectarse a tu canal **AUDIO**, **USAR** !quitar [@usuario] en el canal <#505138561188888577>.`);
+  } else {
+  client.users.get(`${message.author.id}`).send(`No tienes canal **AUDIO** usa !create para obtener tu canal **AUDIO**`)
+  }
+
+
+if (message.guild.channels.exists('name', `💭▸chat-${finalchatname}`)) {
+      ctoe2.overwritePermissions(member.user.id,  {
+                  'MANAGE_PERMISSIONS': false, 'MANAGE_CHANNELS': false,
+                  'READ_MESSAGES': true
+    });
+    client.users.get(`${message.author.id}`).send(`Hecho. Ahora ${member} Puede leer y enviar mensajes a tu canal **TEXTO**, **USAR** !quitar [@usuario] en el canal <#505138561188888577>.`);
+} else {
+  client.users.get(`${message.author.id}`).send(`No tienes canal **TEXTO** usa !create para obtener tu canal **TEXTO**`)
+}
+}
+
+if(command === "quitar") {
+var chatname1 = `${message.author.username}`.toLowerCase();
+var chatname2 = `${chatname1}`.replace(/ /g,"");
+var chatname3 = `${chatname2}`.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "");
+var finalchatname = `${chatname3}`; 
+
+var voicename = `${message.author.username}`;
+
+const ctoe = client.channels.find("name", `🔊▸voz-${voicename}`)
+const ctoe2 = client.channels.find("name", `💭▸chat-${finalchatname}`)
+message.delete()
+
+let member = message.mentions.members.first();
+    if(!member) return client.users.get(`${message.author.id}`).send("Tenes que mencionar un miembro válido de este servidor")
+
+if (message.guild.channels.exists('name', `🔊▸voz-${voicename}`)) { 
+      ctoe.overwritePermissions(member.user.id,  {
+                  'MANAGE_PERMISSIONS':false,              'MANAGE_CHANNELS': false,
+                  'VIEW_CHANNEL': false,                   'CONNECT': false,            
+                  'SPEAK': false
+    });
+  client.users.get(`${message.author.id}`).send(`Hecho. Ahora ${member} **NO** puede conectarse a tu canal **AUDIO**, **USAR** !quitar [@usuario] en el canal <#505138561188888577>.`);
+  } else {
+  client.users.get(`${message.author.id}`).send(`No tienes canal **AUDIO** usa !create para obtener tu canal **AUDIO**`)
+  }
+
+
+if (message.guild.channels.exists('name', `💭▸chat-${finalchatname}`)) {
+      ctoe2.overwritePermissions(member.user.id,  {
+                  'MANAGE_PERMISSIONS': false, 'MANAGE_CHANNELS': false,
+                  'READ_MESSAGES': false
+    });
+    client.users.get(`${message.author.id}`).send(`Hecho. Ahora ${member} **NO** puede leer y enviar mensajes a tu canal **TEXTO**, **USAR** !quitar [@usuario] en el canal <#505138561188888577>.`);
+} else {
+  client.users.get(`${message.author.id}`).send(`No tienes canal **TEXTO** usa !create para obtener tu canal **TEXTO**`)
+}
+}
+
   if(command === "ping") {
     const m = await message.channel.send("Ping?");
     m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
   }
 
+
   if(command === "help") {
-    const embed = {
-  "description": ":robot: **__LISTA DE COMANDOS:__**\n\n`!ping` = __**Nivel de latencia**__\n-----------------------------\n`!do` **(Texto Ambiente)**\n`!me` **(Texto Acción)**\n`!b` **(texto OOC)**\n`!r`**(Texto Radio)**\n\n<a:fidget_spinner:488765926460882964> **__LISTA DE GIF:__**\n\n`fidget_spinner` = <a:fidget_spinner:488765926460882964>\n`PandaPingRee` = <a:PandaPingRee:488774156133990412>\n`fidthink` = <a:fidthink:488774120822145055>\n`CdCard` = <a:CdCard:488774449412177920>\n`alert` = <a:alert:488775516397109258>\n`gordo` =<a:gordo:488775536730963969>\n`boy1` = <a:boy1:488774159812526091>\n`boy2` = <a:boy2:488774136240275466>\n`boy3` = <a:noy3:488774134298312704>\n`boy4` = <a:boy4:488774159321661471>\n`boy5` = <a:boy5:488774154791682059>\n`boy6` = <a:boy6:488774134210363404>\n`boy7` = <a:boy7:488774164380123185>\n\n¿No tienes nitro? solo di el nombre y te envío el gif por ti. :wink:\n Si tiene alguna duda o sugerencia, comuníquese con <@389526841062588416>.",
-  "color": 16743680,
-  "footer": {
-    "icon_url": "https://cdn.discordapp.com/attachments/480084489771417600/489167278647148565/logo.jpg",
-    "text": `'Ndrangheta bot. by Alice • ${message.createdAt}`
-  },
-  "thumbnail": {
-    "url": "https://cdn.discordapp.com/attachments/480084489771417600/489103878701449216/Ndrangheta_gif_1.gif"
-  },
-  "image": {
-    "url": `${message.author.avatarURL}`
-  },
-  "author": {
-    "name": "! Alice ★",
-    "url": "https://discordapp.com/channels/@me/402612675982524426",
-    "icon_url": "https://cdn.discordapp.com/avatars/389526841062588416/5008341da3548acccd1a55348614f15f.png"
-  },
-  "fields": [
-    {
-      "name": "**__USERID:__**",
-      "value": `${message.author.id}`,
-      "inline": true
-    },
-    {
-      "name": "**__USER AVATAR:__**",
-      "value": "--",
-      "inline": true
-    }
-  ]
+const embed = {
+  "description": ":robot: **__LISTA DE COMANDOS:__**\n\n`!ping` = __**Nivel de latencia**__\n`!create` = __**Crea un canal privado sin limite.**__\n`!dar` = __**Das permisos a un usuario a conectarse o leer tus canales privados.**__\n!quitar = __**Quitar permisos a un usuario a conectarse o leer tus canales privados**__\n-----------------------------\n`!do` **(Texto Ambiente)**\n`!me` **(Texto Acción)**\n`!b` **(texto OOC)**\n`!s` **(texto DICE)**\n\n<a:fidget_spinner:488765926460882964> **__LISTA DE GIF:__**\n\n`fidget_spinner` = <a:fidget_spinner:488765926460882964>\n`PandaPingRee` = <a:PandaPingRee:488774156133990412>\n`fidthink` = <a:fidthink:488774120822145055>\n`CdCard` = <a:CdCard:488774449412177920>\n`alert` = <a:alert:488775516397109258>\n`gordo` =<a:gordo:488775536730963969>\n`boy1` = <a:boy1:488774159812526091>\n`boy2` = <a:boy2:488774136240275466>\n`boy3` = <a:noy3:488774134298312704>\n`boy4` = <a:boy4:488774159321661471>\n`boy5` = <a:boy5:488774154791682059>\n`boy6` = <a:boy6:488774134210363404>\n`boy7` = <a:boy7:488774164380123185>\n\n¿No tienes nitro? solo di el nombre y te envío el gif por ti. :wink:\n Si tiene alguna duda o sugerencia, comuníquese con <@389526841062588416>.\n\n**__TU ID:__** " + message.author.id,
+  "color": 16098851
 };
 message.delete()
 client.users.get(`${message.author.id}`).send(`${message.author}`, { embed });
+
   }
   if(command === "say") {
-	if(!message.member.roles.some(r=>["Administrador-bot", "Moderador-bot"].includes(r.name)) )
+	if(!message.member.roles.some(r=>["Administrador", "Moderador"].includes(r.name)) )
       return
+
     const sayMessage = args.join(" ");
     message.delete().catch(O_o=>{}); 
     message.channel.send(sayMessage);
-  }
+   }
+
 
   if(command === "pong") {
-  if(!message.member.roles.some(r=>["Administrador-bot", "Moderador-bot"].includes(r.name)) )
+  if(!message.member.roles.some(r=>["Administrador", "Moderador"].includes(r.name)) )
       return
     message.delete()
     const m = await message.channel.send("@everyone");
     m.edit(`pong GG :ping_pong:`);
-  }
+}
+
+if(command === "ip") {
+  message.delete()
+  query(options, function (error, response) {
+    if(error)
+        console.log(error)
+    else 
+        message.channel.send(`La ip del servidor es ${SERVER_IP} y tiene ${response.online} usuarios conectados.`).then(sentMessage => {
+   sentMessage.delete(2000);
+  })
+})
+}
 
 if(command === "do") {
   let doo = args.join(" ");
@@ -293,7 +412,7 @@ if(command === "do") {
   if(!doo) return message.reply("!do (texto)").then(dome => {
   dome.delete(2000);
   })
-  message.channel.send(`<@&476859219128221721> * ${message.author} (( ${doo} ))`)
+  message.channel.send(`<@&505922890483367956> * ${message.author} (( ${doo} ))`)
 }
 
 if(command === "me") {
@@ -302,7 +421,7 @@ if(command === "me") {
   if(!me) return message.reply("!me (texto)").then(meme => {
   meme.delete(2000);
   })
-  message.channel.send(`<@&476859224991858688> * ${message.author} ${me}`);
+  message.channel.send(`<@&505922889363750913> * ${message.author} ${me}`);
 }
 
 if(command === "b") {
@@ -311,28 +430,22 @@ if(command === "b") {
   if(!b) return message.reply("!b (texto)").then(bme => {
   bme.delete(2000);
   })
-  message.channel.send(`<@&476859221950988298> ID: Nonid | ${message.author}: (( ${b} ))`);
+  message.channel.send(`<@&505923186739904522> ID: Nonid | ${message.author}: (( ${b} ))`);
 }
 
-if(command === "r") {
-  let radio = args.join(" ");
-  message.delete()
-  if(!radio) return message.reply("!r (texto)").then(rme => {
-  rme.delete(2000);
-  })
-  message.channel.send(`** <@&476861498954612764> ${message.author}: ${radio}`);
-}
 
   if(command === "s") {
     let dice = args.join(" ");
+    message.delete()
     if(!dice) return message.reply("!s (texto)").then(sme => {
     sme.delete(2000);
     })
-    message.channel.send(`${message.author} <@&476859116304728084> ${dice}`);
+    message.channel.send(`${message.author} <@&505922891099930634> ${dice}`);
 } 
   if(command === "kick") {
-    if(!message.member.roles.some(r=>["Administrador-bot", "Moderador-bot"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["Administrador", "Moderador"].includes(r.name)) )
       return message.channel.sendMessage('No tienes permisos para utilizar este comando.');
+
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     if(!member)
       return message.reply("Tenes que mencionar un miembro válido de este servidor");
@@ -347,26 +460,17 @@ if(command === "r") {
 const embed = {
   "description": `:robot: **__SISTEMA DE ADMINISTRACIÓN.\n\n(USUARIO EXPULSADO)__**\n${member.user}(ID: ${member.user.id})\n\n**__(RAZÓN:)__**\n${reason}`,
   "color": 16743680,
-  "footer": {
-    "icon_url": "https://cdn.discordapp.com/attachments/480084489771417600/489167278647148565/logo.jpg",
-    "text": `SISTEMA DE ADMINISTRACIÓN • ${message.createdAt}`
-  },
   "thumbnail": {
     "url": "https://cdn.discordapp.com/attachments/480084489771417600/489101173304066049/596bd0f8541debff8d44326e840ea085.png"
-  },
-  "author": {
-    "name": `${message.author.username}`,
-    "icon_url": `${message.author.avatarURL}`
-  },
-  "fields": []
+  }
 };  
-    client.channels.get("476857925613387787").send({ embed })
+    client.channels.get("506202099575554056").send({ embed })
     member.send({ embed })
     message.reply(`GG el ha recibido expulsión.`);
-  }
+}
   
   if(command === "ban") {
-    if(!message.member.roles.some(r=>["Administrador-bot"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["Administrador", "Temporal"].includes(r.name)) )
 		return message.reply('No tienes permisos para utilizar este comando.');
     
     let member = message.mentions.members.first();
@@ -383,36 +487,16 @@ const embed = {
 const embed = {
   "description": `:robot: **__SISTEMA DE ADMINISTRACIÓN.\n\n(USUARIO PROHÍBIDO)__**\n${member.user}(ID: ${member.user.id})\n\n**__(RAZÓN:)__**\n${reason}`,
   "color": 16743680,
-  "footer": {
-    "icon_url": "https://cdn.discordapp.com/attachments/480084489771417600/489167278647148565/logo.jpg",
-    "text": `SISTEMA DE ADMINISTRACIÓN • ${message.createdAt}`
-  },
   "thumbnail": {
     "url": "https://cdn.discordapp.com/attachments/480084489771417600/489101173304066049/596bd0f8541debff8d44326e840ea085.png"
-  },
-  "author": {
-    "name": `${message.author.username}`,
-    "icon_url": `${message.author.avatarURL}`
-  },
-  "fields": []
+  }
 };  
-    client.channels.get("476857925613387787").send({ embed })
+    client.channels.get("506202099575554056").send({ embed })
     member.send({ embed })
     message.reply(`Uy. Ha recibido ban permanentemente GG`);
-  }
-  if(command === "dmto") {
-    if(!message.member.roles.some(r=>["Administrador-bot"].includes(r.name)) )
-      return message.channel.sendMessage('No tenes permisos para utilizar este comando.');
-    
-    let UserToDmID = args[0];
-    let RMessage = args.slice(1).join(' ');
-
-    message.delete()
-    client.users.get(`${UserToDmID}`).send(`__**Respuesta recibida del administrador: ${message.author}**__\n\n${RMessage}`);
-    client.channels.get("476857925613387787").send(`${message.author}, Mensaje enviado correctamente a <@${UserToDmID}>\n\n**__(Respuesta)__**\n ${RMessage}`);
-  }
+}
   if(command === "clear") {  
-    if(!message.member.roles.some(r=>["Administrador-bot"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["Administrador", "Temporal"].includes(r.name)) )
     return message.channel.sendMessage('¿Eliminar chat? jaja');
 
     const deleteCount = parseInt(args[0], 10);
@@ -425,11 +509,11 @@ const embed = {
     message.delete()
     message.channel.bulkDelete(fetched) 
     .then((fetched) => {
-        client.channels.get("476857925613387787").send(`${message.author}, Se han eliminado ${deleteCount} mensajes en el canal ${message.channel}.`);
+        client.channels.get("506202099575554056").send(`${message.author}, Se han eliminado ${deleteCount} mensajes en el canal ${message.channel}.`);
     })
     .catch((error) => {
-        client.channels.get("476857925613387787").send(`${message.author} No pude eliminar mensajes porque: ${error}`);
+        client.channels.get("506202099575554056").send(`${message.author} No pude eliminar mensajes porque: ${error}`);
     })
-  }
+}
 });
 client.login(process.env.BOT_TOKEN);
